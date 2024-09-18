@@ -1,0 +1,87 @@
+<div class="grid-container">
+
+  <h1 class="mat-h1">Main Section</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    
+     
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              Card Alumnos
+              <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu" xPosition="before">
+                <button mat-menu-item>Expand</button>
+                <button mat-menu-item>Remove</button>
+              </mat-menu>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div>Card Content Here</div>
+            <table>
+              @for (elementStudent of studentsArray; track elementStudent) {
+                <!--<div>{{elementStudent.id}}</div> -->
+                  <tr>
+                    <td>
+                      {{elementStudent.id}}
+                    </td>
+                    <td>
+                      {{elementStudent.apellido}}
+                    </td>
+                    <td>
+                      <button type="submit" (click)="
+                        eliminar(elementStudent.id)">Eliminar</button>
+                    </td>
+                  </tr>
+              }
+            </table>
+
+
+          </mat-card-content>
+        </mat-card>
+    
+    
+  </mat-grid-list>
+</div>
+
+<div class="grid-container">
+  <mat-grid-list cols="2" rowHeight="350px">
+    
+     
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              Formulario
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <!--Formulario (No te revuelvas)-->
+
+            <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
+              <input type="text" placeholder="Nombre(s)" formControlName="nombre" >
+              <div class="alert" [hidden]="usuarioForm.controls.nombre.valid">
+                Dato Necesario
+              </div>
+              <br>
+              <input type="text" placeholder="Apellidos" formControlName="apellido" >
+              <div class="alert" [hidden]="usuarioForm.controls.apellido.valid">
+                Dato Necesario
+              </div>
+
+              <div formGroupName="direccion" >
+                <input type="text" formControlName="estado">
+
+                <br>
+                <input type="text" formControlName="municipio">
+              </div>
+
+              <button type="submit" [disabled]="!usuarioForm.valid">Agregar</button>
+            </form>
+
+          </mat-card-content>
+        </mat-card>
+    
+    
+  </mat-grid-list>
+</div>
