@@ -7,9 +7,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder, Validator, Validators} from '@angular/forms'; 
+import { ReactiveFormsModule, FormControl, FormGroup, FormBuilder, Validator, Validators} from '@angular/forms'
 
 import { Students } from '../../models/student';
+
+
+import {
+  MatDialog,
+} from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +30,7 @@ import { Students } from '../../models/student';
     MatButtonModule,
     MatCardModule,
     ReactiveFormsModule,
+    DialogComponent
   ]
 })
 
@@ -85,7 +92,13 @@ const newStudent: Students = {
   }
 
 
-  
+
+  readonly dialog = inject(MatDialog);
+  openDialog(student: Students): void {
+    this.dialog.open(DialogComponent, {
+      data: { student }, // Pasar solo el estudiante clickeado
+    });
+  }
 
 
   private breakpointObserver = inject(BreakpointObserver);

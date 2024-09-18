@@ -5,6 +5,7 @@
     
      
         <mat-card class="dashboard-card">
+          
           <mat-card-header>
             <mat-card-title>
               Card Alumnos
@@ -27,12 +28,16 @@
                       {{elementStudent.id}}
                     </td>
                     <td>
+                      {{elementStudent.nombre}}
+                    </td>
+                    <td>
                       {{elementStudent.apellido}}
                     </td>
                     <td>
                       <button type="submit" (click)="
                         eliminar(elementStudent.id)">Eliminar</button>
                     </td>
+                    <td><button mat-button (click)="openDialog(elementStudent)">Ver Detalles</button></td>
                   </tr>
               }
             </table>
@@ -70,10 +75,10 @@
               </div>
 
               <div formGroupName="direccion" >
-                <input type="text" formControlName="estado">
+                <input type="text" placeholder="Estado" formControlName="estado">
 
                 <br>
-                <input type="text" formControlName="municipio">
+                <input type="text" placeholder="Municipio" formControlName="municipio">
               </div>
 
               <button type="submit" [disabled]="!usuarioForm.valid">Agregar</button>
